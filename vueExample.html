@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>Vue.js</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Vue.js - The Progressive JavaScript Framework Example">
+  <!-- <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono' rel='stylesheet' type='text/css'> -->
+  <!-- <link href='//fonts.googleapis.com/css?family=Dosis:500&text=Vue.js' rel='stylesheet' type='text/css'> -->
+  <link rel="stylesheet" href="element-ui.css">
+  <style type="text/css">
+    .el-row {
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!--
+    <mu-container>
+      <p>1. [ {{ message }} ]</p>
+      <p>2. [ {{ reverseMessage }} ]</p>
+      <input type="text" v-model="message"/>
+      <button v-on:click="reverse">BUTTON</>
+    </mu-container>
+  -->
+  <el-row>
+    <el-col :span="24">
+      <el-radio-group v-model="radio" size="medium">
+        <el-radio-button label="master"></el-radio-button>
+        <el-radio-button label="dev"></el-radio-button>
+      </el-radio-group>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="24">
+      <el-table v-loading="loading" :data="tableData" style="width: 100%" stripe border @cell-click="openSimpleDialog">
+        <el-table-column prop="commit.author.date" label="日期" width="180"></el-table-column>
+        <el-table-column prop="commit.author.name" label="姓名" width="180"></el-table-column>
+        <el-table-column prop="comments_url" label="地址"></el-table-column>
+      </el-table>
+      <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="page"
+      :page-sizes="[10, 20, 25, 30]"
+      :page-size="size"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination>
+      <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+        <el-form :model="formData">
+          <el-form-item label="活动名称" :label-width="formLabelWidth">
+            <el-input v-model="formData.comments_url" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="活动区域" :label-width="formLabelWidth">
+            <el-input type="textarea" v-model="dataInJson" placeholder="请选择活动区域"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        </div>
+      </el-dialog>
+    </el-col>
+  </el-row>
+</div>
+</body>
+<script src="vue.js"></script>
+<script src="element-ui.js"></script>
+<script src="app.js"></script>
+</html>
